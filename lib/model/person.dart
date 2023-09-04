@@ -18,7 +18,11 @@ class Person {
   }
 
   double get imc {
-    return weight / (height * height);
+    if (height <= 0) {
+      return 0;
+    } else {
+      return weight / (height * height);
+    }
   }
 
   String get getImcString {

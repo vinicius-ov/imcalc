@@ -6,16 +6,29 @@ class InputReader {
     bool readingInput = true;
     double numero = 0;
     while (readingInput) {
-      var line = readInput();
+      var line = readInput() ?? '0';
+      line = line.replaceAll(",", ".");
       try {
-        numero = double.parse(line ?? '');
-        readingInput = false;
+        numero = parseNumber(line) ?? 0.0;
+        if (numero > 0) {
+          readingInput = false;
+        } else {
+          print('Valor digitado inválido. Tente novamente: ');
+        }
       } catch (e) {
         print('Valor digitado inválido. Tente novamente: ');
-        readingInput = true;
       }
     }
     return numero;
+  }
+
+  double? parseNumber(String line) {
+    double numero = double.parse(line);
+    if (numero > 0) {
+      return numero;
+    } else {
+      return null;
+    }
   }
 
   String? readInput() {

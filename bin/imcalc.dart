@@ -18,6 +18,11 @@ void printResults(Person person) {
   print('');
 }
 
+void printQuit() {
+  print('Calculadora encerrada!');
+  print('');
+}
+
 void main(List<String> arguments) {
   printHeader();
 
@@ -28,7 +33,7 @@ void main(List<String> arguments) {
     print('Digite seu nome: (nome vazio para sair)');
     var line = reader.readInput();
     if (line == null || line == '') {
-      print('Calculadora encerrada!');
+      printQuit();
       quit = true;
     } else {
       String name = line;
