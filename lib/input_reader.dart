@@ -17,8 +17,8 @@ class InputReader {
     }
     return numero;
   }
-}
 
-String? readInput() {
-  return stdin.readLineSync(encoding: utf8);
+  String? readInput() {
+    return stdin.readLineSync(encoding: utf8);
+  }
 }

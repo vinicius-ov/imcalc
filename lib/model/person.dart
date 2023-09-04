@@ -1,9 +1,9 @@
 class Person {
-  String name = '';
-  double weight = 0;
-  double height = 0;
+  String name;
+  double weight;
+  double height;
 
-  Person();
+  Person({required this.name, required this.weight, required this.height});
 
   void setName(String name) {
     this.name = name;
@@ -17,16 +17,16 @@ class Person {
     this.height = height;
   }
 
-  double get _imc {
+  double get imc {
     return weight / (height * height);
   }
 
   String get getImcString {
-    return _imc.toStringAsFixed(_imc.truncateToDouble() == _imc ? 0 : 2);
+    return imc.toStringAsFixed(imc.truncateToDouble() == imc ? 0 : 2);
   }
 
   String get imcMessage {
-    switch (_imc) {
+    switch (imc) {
       case > 16 && < 17:
         return 'Magreza moderada';
       case > 17 && < 18.5:

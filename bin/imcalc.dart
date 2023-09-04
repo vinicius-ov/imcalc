@@ -1,43 +1,45 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:imcalc/input_reader.dart';
 import 'package:imcalc/model/person.dart';
 
-void main(List<String> arguments) {
+void printHeader() {
   print('');
   print('--------------------------');
   print('Calculadora IMC');
   print('--------------------------');
   print('');
+}
 
+void printResults(Person person) {
+  print('');
+  print('--------------------------');
+  print('O IMC de ${person.name} é: ${person.getImcString}');
+  print('Classificação: ${person.imcMessage}');
+  print('--------------------------');
+  print('');
+}
+
+void main(List<String> arguments) {
+  printHeader();
+
+  var reader = InputReader();
   var quit = false;
-  Person person = Person();
 
   while (!quit) {
     print('Digite seu nome: (nome vazio para sair)');
-    var line = stdin.readLineSync(encoding: utf8);
+    var line = reader.readInput();
     if (line == null || line == '') {
       print('Calculadora encerrada!');
       quit = true;
     } else {
-      String nome = line;
-      person.setName(nome);
+      String name = line;
 
       print('Digite seu peso (em kg): ');
-      var weight = InputReader().readValue();
-      person.setWeight(weight);
+      var weight = reader.readValue();
 
       print('Digite sua altura (em metros): ');
-      var height = InputReader().readValue();
-      person.setHeight(height);
+      var height = reader.readValue();
 
-      print('');
-      print('--------------------------');
-      print('O IMC do ${person.name} é: ${person.getImcString}');
-      print('Classificação: ${person.imcMessage}');
-      print('--------------------------');
-      print('');
+      printResults(Person(name: name, weight: weight, height: height));
     }
   }
 }
